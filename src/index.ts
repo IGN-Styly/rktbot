@@ -28,7 +28,11 @@ client.on(Events.InteractionCreate, async interaction => {
 		console.error(`No command matching ${interaction.commandName} was found.`);
 		return;
 	}
-
+	const member = interaction.guild?.members.cache.get(interaction.user.id)
+        if(!member?.roles.cache.some(role=>role.id==env.role)){
+            await interaction.reply("No perms")
+			return;
+        }
 	try {
 		await command.execute(interaction);
 	} catch (error) {
