@@ -1,14 +1,12 @@
 import { REST, Routes } from 'discord.js';
 import {env} from "@env/server"
-import fs from 'node:fs';
-import path from 'node:path';
-import whoami from './commands/util/whoami';
+import index from "@/commands/index"
 
-const commands = [whoami.data];
+var commands = [];
+for(var i=0;i<index.length;i++ ){
+	commands.push(index[i].data)
+}
 // Grab all the command folders from the commands directory you created earlier
-const foldersPath = path.join(__dirname, 'commands');
-const commandFolders = fs.readdirSync(foldersPath);
-
 
 // Construct and prepare an instance of the REST module
 const rest = new REST().setToken(env.token);
