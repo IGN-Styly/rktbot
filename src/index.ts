@@ -5,6 +5,7 @@ import index from '@/commands/index'
 
 
 const client = new Client({intents:['Guilds','GuildMessages','GuildMembers','MessageContent']});
+const guild = client.guilds.cache.get('1205479733844910131')
 var commands:Collection<string,cmd> = new Collection();
 type cmd = {
     data:SlashCommandBuilder,
@@ -22,7 +23,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	const command = commands.get(interaction.commandName);
-
+	
 	if (!command) {
 		console.error(`No command matching ${interaction.commandName} was found.`);
 		return;
